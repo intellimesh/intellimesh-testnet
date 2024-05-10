@@ -1,0 +1,31 @@
+[settings]
+timeout = 180000
+default_args = [ "-lparachain=debug" ]
+
+[relaychain]
+#default_command = "/home/miner3/dev/intellimesh/intellimesh-sdk/target/release/polkadot"
+default_command = "./bin/polkadot"
+chain = "rococo-local"
+
+  [[relaychain.nodes]]
+  name = "alice"
+  validator = true
+  ws_port = 9944
+
+  [[relaychain.nodes]]
+  name = "bob"
+  validator = true
+  ws_port = 9945
+
+[[parachains]]
+id = 2000
+cumulus_based = true
+#chain = "cortex-chain"
+
+  # run charlie as parachain collator
+  [[parachains.collators]]
+  name = "charlie"
+  #command = "/home/miner3/dev/intellimesh/intellimesh-sdk/cortex/target/release/cortex"
+  command = "./bin/cortex"
+  ws_port = 8844
+  args = ["--force-authoring"]
